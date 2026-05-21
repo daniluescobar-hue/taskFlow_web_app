@@ -8,15 +8,15 @@ La plataforma permite gestionar tareas, visualizar fechas importantes mediante u
 
 # Características principales
 
-✅ Registro e inicio de sesión de usuarios  
-✅ Gestión de tareas académicas y personales  
-✅ Prioridades automáticas según fecha de entrega  
-✅ Dashboard interactivo y moderno  
-✅ Calendario dinámico integrado  
-✅ TaskBot con mensajes motivacionales  
-✅ Diseño responsive adaptable a dispositivos móviles  
-✅ Base de datos SQLite  
-✅ Interfaz moderna desarrollada con HTML, CSS y Flask  
+* Registro e inicio de sesión de usuarios  
+* Gestión de tareas académicas y personales  
+* Prioridades automáticas según fecha de entrega  
+* Dashboard interactivo y moderno  
+* Calendario dinámico integrado  
+* TaskBot con mensajes motivacionales  
+* Diseño responsive adaptable a dispositivos móviles  
+* Base de datos SQLite  
+* Interfaz moderna desarrollada con HTML, CSS y Flask  
 
 ---
 
@@ -36,6 +36,7 @@ La plataforma permite gestionar tareas, visualizar fechas importantes mediante u
 
 Próximamente se agregarán capturas de pantalla de la plataforma.
 <img width="1433" height="961" alt="imagen" src="https://github.com/user-attachments/assets/ac029735-ad60-45f5-a73b-ae88a1d2cec2" />
+<img width="1426" height="959" alt="imagen" src="https://github.com/user-attachments/assets/624d9367-e70f-436b-bc01-7c5fdee27158" />
 <img width="1424" height="972" alt="imagen" src="https://github.com/user-attachments/assets/b2b5bb79-ef17-486d-a834-b280d8d42e54" />
 
 
