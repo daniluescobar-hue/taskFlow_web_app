@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Registro - TaskFlow AI</title>
+
+    <style>
+
+        body {
+
+            margin: 0;
+            font-family: Arial;
+            background: linear-gradient(to right, #667eea, #764ba2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .register-box {
+
+            background: white;
+            padding: 45px;
+            border-radius: 25px;
+            width: 420px;
+            box-shadow: 0px 10px 35px rgba(0,0,0,0.25);
+        }
+
+        h1 {
+
+            text-align: center;
+            color: #764ba2;
+        }
+
+        .description {
+
+            text-align: center;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        input {
+
+            width: 100%;
+            padding: 14px;
+            margin-top: 15px;
+            border-radius: 12px;
+            border: 2px solid #ddd;
+        }
+
+        button {
+
+            width: 100%;
+            padding: 14px;
+            margin-top: 20px;
+            border: none;
+            background: #764ba2;
+            color: white;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        p {
+
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        a {
+
+            color: #764ba2;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="register-box">
+
+    <h1>📝 Crear cuenta</h1>
+
+    <p class="description">
+
+        Regístrate en TaskFlow AI para comenzar a gestionar tareas,
+        entregas académicas y actividades importantes mediante
+        una plataforma inteligente y organizada.
+
+    </p>
+
+    <form action="/register" method="POST">
+
+        <input
+            type="text"
+            name="username"
+            placeholder="Usuario"
+            required
+        >
+
+        <input
+            type="password"
+            name="password"
+            placeholder="Contraseña de 4 dígitos"
+            maxlength="4"
+            required
+        >
+
+        <button type="submit">
+            Crear cuenta
+        </button>
+
+    </form>
+
+    <p>
+
+        ¿Ya tienes cuenta?
+        <a href="/">
+            Iniciar sesión
+        </a>
+
+    </p>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>TaskFlow AI</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <!-- SIDEBAR -->
+
+    <div class="sidebar">
+
+        <!-- CALENDARIO -->
+
+        <div class="side-card">
+
+            <h2>📅 Calendario</h2>
+
+            <div id="calendar"></div>
+
+        </div>
+
+        <!-- TASKBOT -->
+
+        <div class="side-card">
+
+            <h2>🤖 TaskBot</h2>
+
+            <div class="bot-status">
+                ● En línea
+            </div>
+
+            <p>
+                {{ bot_message }}
+            </p>
+
+            <hr>
+
+            <small>
+                🚀 TaskFlow AI analiza tus próximas entregas.
+            </small>
+
+        </div>
+
+        <!-- ESTADÍSTICAS -->
+
+        <div class="side-card">
+
+            <h2>📊 Estadísticas</h2>
+
+            <p>
+                ✅ Completadas:
+                {{ tasks | selectattr(5, 'equalto', 1) | list | length }}
+            </p>
+
+            <p>
+                📋 Pendientes:
+                {{ tasks | selectattr(5, 'equalto', 0) | list | length }}
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- MAIN CONTENT -->
+
+    <div class="main-content">
+
+        <!-- HEADER -->
+
+        <div class="header">
+
+            <h1>
+                ✨ Bienvenida, {{ username }}
+            </h1>
+
+            <p>
+
+                Plataforma inteligente para organizar tareas,
+                entregas académicas y mejorar tu productividad.
+
+            </p>
+
+        </div>
+
+        <!-- CARDS -->
+
+        <div class="cards">
+
+            <div class="card">
+
+                <h3>📋 Total tareas</h3>
+
+                <p>
+                    {{ tasks|length }}
+                </p>
+
+            </div>
+
+            <div class="card">
+
+                <h3>✅ Completadas</h3>
+
+                <p>
+                    {{ tasks | selectattr(5, 'equalto', 1) | list | length }}
+                </p>
+
+            </div>
+
+            <div class="card">
+
+                <h3>🚀 Productividad</h3>
+
+                <p>
+                    Activa
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- EXTRA SECTION -->
+
+        <div class="extra-section">
+
+            <div class="info-card">
+
+                <h3>📌 Próximas entregas</h3>
+
+                {% for task in tasks[:3] %}
+
+                    <div class="upcoming-task">
+
+                        <strong>
+                            {{ task[2] }}
+                        </strong>
+
+                        <small>
+                            📅 {{ task[4] }}
+                        </small>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+            <div class="info-card">
+
+                <h3>🎯 Objetivo diario</h3>
+
+                <p>
+
+                    Completa tareas importantes
+                    para mantener un progreso constante.
+
+                </p>
+
+            </div>
+
+            <div class="info-card">
+
+                <h3>💡 Consejo</h3>
+
+                <p>
+
+                    Divide tareas grandes en pequeñas metas.
+                    Esto mejora la concentración.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- FORMULARIO -->
+
+        <form action="/add" method="POST">
+
+            <input
+                type="text"
+                name="title"
+                placeholder="Nueva tarea..."
+                required
+            >
+
+            <input
+                type="date"
+                name="due_date"
+                required
+            >
+
+            <button type="submit">
+                Agregar
+            </button>
+
+        </form>
+
+        <!-- LISTA -->
+
+        <ul>
+
+            {% for task in tasks %}
+
+            <li>
+
+                <div class="task-info">
+
+                    <span
+                        class="{% if task[5] == 1 %}completed{% endif %}"
+                    >
+
+                        {{ task[2] }}
+
+                    </span>
+
+                    <small>
+
+                        {% if task[3] == "Alta" %}
+                            🔴
+                        {% elif task[3] == "Media" %}
+                            🟡
+                        {% else %}
+                            🟢
+                        {% endif %}
+
+                        {{ task[3] }}
+
+                        |
+
+                        📅 {{ task[4] }}
+
+                    </small>
+
+                </div>
+
+                <div class="actions">
+
+                    {% if task[5] == 0 %}
+
+                        <a href="/complete/{{ task[0] }}">
+                            ✅
+                        </a>
+
+                    {% endif %}
+
+                    <a href="/delete/{{ task[0] }}">
+                        ❌
+                    </a>
+
+                </div>
+
+            </li>
+
+            {% endfor %}
+
+        </ul>
+
+        <!-- FOOTER -->
+
+        <div class="dashboard-footer">
+
+            <p>
+
+                🚀 TaskFlow AI · Plataforma desarrollada
+                con Python, Flask y SQLite.
+
+            </p>
+
+        </div>
+
+        <a class="logout-btn" href="/logout">
+
+            Cerrar sesión
+
+        </a>
+
+    </div>
+
+</div>
+
+<!-- JAVASCRIPT CALENDARIO -->
+
+<script>
+
+const calendar = document.getElementById("calendar");
+
+const date = new Date();
+
+const month = date.getMonth();
+
+const year = date.getFullYear();
+
+const months = [
+
+    "Enero",
+    "Febrero",
+    "Marzo",
+    "Abril",
+    "Mayo",
+    "Junio",
+    "Julio",
+    "Agosto",
+    "Septiembre",
+    "Octubre",
+    "Noviembre",
+    "Diciembre"
+
+];
+
+const daysContainer = document.createElement("div");
+
+daysContainer.classList.add("calendar-grid");
+
+const firstDay = new Date(year, month, 1).getDay();
+
+const lastDate = new Date(year, month + 1, 0).getDate();
+
+calendar.innerHTML = `
+
+<h3 class="calendar-title">
+${months[month]} ${year}
+</h3>
+
+<div class="weekdays">
+
+    <div>Dom</div>
+    <div>Lun</div>
+    <div>Mar</div>
+    <div>Mié</div>
+    <div>Jue</div>
+    <div>Vie</div>
+    <div>Sáb</div>
+
+</div>
+
+`;
+
+for (let i = 0; i < firstDay; i++) {
+
+    const empty = document.createElement("div");
+
+    daysContainer.appendChild(empty);
+}
+
+for (let day = 1; day <= lastDate; day++) {
+
+    const dayElement = document.createElement("div");
+
+    dayElement.classList.add("calendar-day");
+
+    if (day === date.getDate()) {
+
+        dayElement.classList.add("today");
+    }
+
+    dayElement.innerText = day;
+
+    daysContainer.appendChild(dayElement);
+}
+
+calendar.appendChild(daysContainer);
+
+</script>
+
+</body>
+</html>
