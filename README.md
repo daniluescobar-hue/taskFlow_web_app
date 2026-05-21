@@ -48,7 +48,7 @@ Próximamente se agregarán capturas de pantalla de la plataforma.
 ## 1. Clonar repositorio
 
 ```bash
-git clone https://github.com/TU-USUARIO/taskflow-ai.git
+git clone https://github.com/daniluescobar-hue/taskflow-ai.git
 ```
 
 ---
